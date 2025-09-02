@@ -43,21 +43,21 @@ const Home = () => {
   const features = [
     {
       icon: Languages,
-      title: '🌍 Translator',
+      title: 'Translator',
       description: 'Translate text to multiple Indian languages instantly',
       path: '/translator',
       gradient: 'from-primary to-accent'
     },
     {
       icon: NavigationIcon,
-      title: '🛣️ Safe Directions',
+      title: 'Safe Directions',
       description: 'AI-powered route planning with safety recommendations',
       path: '/routes',
       gradient: 'from-secondary to-primary'
     },
     {
       icon: MessageCircle,
-      title: '🤖 AI Chatbot',
+      title: 'AI Chatbot',
       description: 'Your intelligent travel companion for India',
       path: '/chatbot',
       gradient: 'from-accent to-secondary'
