@@ -47,7 +47,7 @@
 
     /* Gradient definitions */
     --gradient-hero: linear-gradient(135deg, hsl(230 60% 15%), hsl(260 70% 30%), hsl(280 80% 40%), hsl(320 70% 50%), hsl(15 90% 55%));
-    --gradient-lovable: radial-gradient(circle at center, hsl(280 80% 40%) 0%, hsl(260 70% 30%) 30%, hsl(230 60% 15%) 60%, hsl(320 70% 50%) 80%, hsl(15 90% 55%) 100%);
+    --gradient-lovable: radial-gradient(circle at 50% 100%, hsl(15 90% 55%) 0%, hsl(320 70% 50%) 20%, hsl(280 80% 40%) 40%, hsl(260 70% 30%) 60%, hsl(230 60% 15%) 80%);
     --gradient-glass: linear-gradient(135deg, hsla(220 15% 15% / 0.2), hsla(220 30% 25% / 0.1));
     --gradient-glow: radial-gradient(circle at center, hsla(210 100% 60% / 0.3), transparent 70%);
     
