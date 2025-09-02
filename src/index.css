@@ -62,7 +62,7 @@
   }
 
   html {
-    @apply dark;
+    /* Dark mode is enabled via <html class="dark"> in index.html */
   }
 
   body {
