@@ -62,7 +62,7 @@ export default {
 				}
 			},
 			backgroundImage: {
-				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-lovable': 'var(--gradient-lovable)',
 				'gradient-glass': 'var(--gradient-glass)',
 				'gradient-glow': 'var(--gradient-glow)'
 			},
