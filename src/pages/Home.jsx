@@ -83,7 +83,6 @@ const Home = () => {
           <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
             Unfold India
           </span>
-          <span className="block text-4xl md:text-5xl mt-2">🌏</span>
         </motion.h1>
 
         {/* Hero Subtitle */}
