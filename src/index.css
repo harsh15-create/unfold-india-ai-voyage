@@ -6,50 +6,50 @@
 
 @layer base {
   :root {
-    /* Dark theme base */
-    --background: 220 23% 8%;
-    --foreground: 0 0% 98%;
+    /* Light beige theme base */
+    --background: 45 50% 94%; /* Warm cream #F5F4F0 */
+    --foreground: 120 25% 20%; /* Dark forest green #2D4A2B */
 
     /* Card and surfaces */
-    --card: 220 15% 12%;
-    --card-foreground: 0 0% 95%;
+    --card: 45 35% 96%; /* Light cream for cards */
+    --card-foreground: 120 25% 20%;
 
-    --popover: 220 15% 12%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 45 35% 96%;
+    --popover-foreground: 120 25% 20%;
 
     /* Brand colors */
-    --primary: 210 100% 50%; /* Electric Blue #2979FF */
-    --primary-foreground: 0 0% 100%;
+    --primary: 120 35% 25%; /* Deep forest green #2D5A27 */
+    --primary-foreground: 45 50% 95%;
 
-    --secondary: 25 100% 50%; /* Orange #FF6F00 */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 25 85% 55%; /* Warm orange #E67E22 */
+    --secondary-foreground: 45 50% 95%;
 
     /* Glassmorphic surfaces */
-    --glass: 220 15% 15%;
-    --glass-border: 220 30% 25%;
-    --glass-glow: 210 100% 60%;
+    --glass: 45 40% 92%;
+    --glass-border: 45 25% 85%;
+    --glass-glow: 120 35% 45%;
 
     /* Interactive elements */
-    --muted: 220 10% 20%;
-    --muted-foreground: 220 5% 70%;
+    --muted: 45 25% 88%;
+    --muted-foreground: 120 15% 45%;
 
-    --accent: 260 70% 35%; /* Purple accent for gradients */
-    --accent-foreground: 0 0% 100%;
+    --accent: 35 60% 70%; /* Soft peach accent */
+    --accent-foreground: 120 25% 20%;
 
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 20%;
-    --input: 220 20% 15%;
-    --ring: 210 100% 50%;
+    --border: 45 20% 85%;
+    --input: 45 30% 90%;
+    --ring: 120 35% 25%;
 
     --radius: 1rem;
 
     /* Gradient definitions */
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 5%), hsl(0 0% 10%), hsl(280 80% 40%), hsl(320 70% 50%), hsl(15 90% 55%));
-    --gradient-lovable: radial-gradient(circle at 50% 100%, hsl(15 90% 55%) 0%, hsl(320 70% 50%) 20%, hsl(280 80% 40%) 40%, hsl(260 70% 30%) 60%, hsl(230 60% 15%) 80%);
-    --gradient-glass: linear-gradient(135deg, hsla(220 15% 15% / 0.2), hsla(220 30% 25% / 0.1));
-    --gradient-glow: radial-gradient(circle at center, hsla(210 100% 60% / 0.3), transparent 70%);
+    --gradient-hero: linear-gradient(135deg, hsl(45 50% 96%), hsl(45 40% 92%), hsl(35 45% 88%), hsl(25 50% 85%));
+    --gradient-lovable: linear-gradient(135deg, hsl(45 50% 94%) 0%, hsl(45 45% 91%) 25%, hsl(40 40% 88%) 50%, hsl(35 35% 85%) 75%, hsl(30 30% 82%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsla(45 40% 92% / 0.4), hsla(45 25% 85% / 0.2));
+    --gradient-glow: radial-gradient(circle at center, hsla(120 35% 45% / 0.2), transparent 70%);
     
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -74,9 +74,9 @@
 
   /* Glassmorphic base classes */
   .glass {
-    background: linear-gradient(135deg, hsla(220 15% 15% / 0.2), hsla(220 30% 25% / 0.1));
+    background: var(--gradient-glass);
     backdrop-filter: blur(20px);
-    border: 1px solid hsla(220 30% 25% / 0.3);
+    border: 1px solid hsl(var(--glass-border) / 0.3);
   }
 
   .glass-hover {
@@ -84,18 +84,18 @@
   }
 
   .glass-hover:hover {
-    background: linear-gradient(135deg, hsla(220 15% 20% / 0.3), hsla(220 30% 25% / 0.2));
-    border-color: hsla(210 100% 50% / 0.4);
-    box-shadow: 0 8px 32px hsla(210 100% 50% / 0.2);
+    background: linear-gradient(135deg, hsla(45 35% 88% / 0.5), hsla(45 20% 82% / 0.3));
+    border-color: hsl(var(--primary) / 0.4);
+    box-shadow: 0 8px 32px hsl(var(--primary) / 0.15);
     transform: translateY(-2px);
   }
 
   .glow-primary {
-    box-shadow: 0 0 30px hsla(210 100% 50% / 0.3);
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.2);
   }
 
   .glow-secondary {
-    box-shadow: 0 0 30px hsla(25 100% 50% / 0.3);
+    box-shadow: 0 0 30px hsl(var(--secondary) / 0.2);
   }
 
   /* Hero gradient with grain noise */
@@ -110,11 +110,11 @@
     position: absolute;
     inset: 0;
     background-image: 
-      radial-gradient(circle at 25% 25%, transparent 20%, rgba(255, 255, 255, 0.05) 21%, transparent 22%),
-      radial-gradient(circle at 75% 75%, transparent 20%, rgba(255, 255, 255, 0.03) 21%, transparent 22%),
-      radial-gradient(circle at 50% 50%, transparent 20%, rgba(255, 255, 255, 0.02) 21%, transparent 22%);
+      radial-gradient(circle at 25% 25%, transparent 20%, rgba(120, 80, 40, 0.08) 21%, transparent 22%),
+      radial-gradient(circle at 75% 75%, transparent 20%, rgba(120, 80, 40, 0.05) 21%, transparent 22%),
+      radial-gradient(circle at 50% 50%, transparent 20%, rgba(120, 80, 40, 0.03) 21%, transparent 22%);
     background-size: 3px 3px, 5px 5px, 7px 7px;
-    opacity: 0.8;
+    opacity: 0.6;
     pointer-events: none;
   }
 
@@ -136,15 +136,15 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(220 20% 10%);
+    background: hsl(var(--muted));
   }
 
   ::-webkit-scrollbar-thumb {
-    background: hsl(210 100% 50%);
+    background: hsl(var(--primary));
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(210 100% 60%);
+    background: hsl(var(--primary) / 0.8);
   }
 }
