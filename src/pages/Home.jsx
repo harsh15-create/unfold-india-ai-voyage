@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { MessageCircle, Navigation as NavigationIcon, Languages } from 'lucide-react';
+import indiaMap from '@/assets/india-map.png';
 
 const Home = () => {
   const containerVariants = {
@@ -68,6 +69,15 @@ const Home = () => {
     <div className="min-h-screen flex flex-col items-center justify-center px-4 pt-20">
       {/* Hero Background */}
       <div className="absolute inset-0 hero-gradient opacity-20" />
+      
+      {/* India Map Background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <img 
+          src={indiaMap} 
+          alt="India Map" 
+          className="w-96 h-96 md:w-[500px] md:h-[500px] opacity-10 object-contain"
+        />
+      </div>
       
       <motion.div
         variants={containerVariants}
