@@ -98,6 +98,26 @@
     box-shadow: 0 0 30px hsla(25 100% 50% / 0.3);
   }
 
+  /* Hero gradient with grain noise */
+  .hero-gradient {
+    background: var(--gradient-hero);
+    background-attachment: fixed;
+    position: relative;
+  }
+  
+  .hero-gradient::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, transparent 20%, rgba(255, 255, 255, 0.05) 21%, transparent 22%),
+      radial-gradient(circle at 75% 75%, transparent 20%, rgba(255, 255, 255, 0.03) 21%, transparent 22%),
+      radial-gradient(circle at 50% 50%, transparent 20%, rgba(255, 255, 255, 0.02) 21%, transparent 22%);
+    background-size: 3px 3px, 5px 5px, 7px 7px;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
   /* Lovable-style gradient background */
   .lovable-gradient {
     background: var(--gradient-lovable);
