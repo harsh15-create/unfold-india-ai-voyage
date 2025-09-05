@@ -1,28 +1,28 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { MessageCircle, Navigation as NavigationIcon, Languages, Upload, X } from 'lucide-react';
-import { useState } from 'react';
+import { MessageCircle, Navigation as NavigationIcon, Languages } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import indiaMap from '@/assets/india-map.png';
 
 const Home = () => {
-  const [customMapImage, setCustomMapImage] = useState(null);
-  const [showUpload, setShowUpload] = useState(false);
+  const [mapImage, setMapImage] = useState(indiaMap);
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setCustomMapImage(e.target.result);
-        setShowUpload(false);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const removeCustomImage = () => {
-    setCustomMapImage(null);
-  };
+  useEffect(() => {
+    // Check if custom map exists in public folder
+    const checkCustomMap = async () => {
+      try {
+        const response = await fetch('/custom-map.png');
+        if (response.ok) {
+          setMapImage('/custom-map.png');
+        }
+      } catch (error) {
+        // If custom map doesn't exist, use default
+        setMapImage(indiaMap);
+      }
+    };
+    
+    checkCustomMap();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -93,56 +93,10 @@ const Home = () => {
       {/* India Map Background */}
       <div className="absolute inset-0 pointer-events-none">
         <img 
-          src={customMapImage || indiaMap} 
+          src={mapImage} 
           alt="India Map" 
           className="w-full h-full opacity-10 object-cover"
         />
-      </div>
-
-      {/* Map Upload Control */}
-      <div className="fixed top-24 right-4 z-50">
-        {!showUpload ? (
-          <motion.button
-            onClick={() => setShowUpload(true)}
-            className="glass glass-hover rounded-full p-3 hover:scale-110 transition-transform"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Upload className="w-5 h-5 text-foreground" />
-          </motion.button>
-        ) : (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="glass glass-hover rounded-lg p-4 space-y-3"
-          >
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-medium text-foreground">Upload Map</span>
-              <button 
-                onClick={() => setShowUpload(false)}
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="text-xs text-foreground file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-primary file:text-primary-foreground file:hover:bg-primary/90 file:cursor-pointer"
-            />
-            
-            {customMapImage && (
-              <button
-                onClick={removeCustomImage}
-                className="text-xs text-destructive hover:text-destructive/80 underline"
-              >
-                Reset to default
-              </button>
-            )}
-          </motion.div>
-        )}
       </div>
       
       <motion.div
