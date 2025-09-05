@@ -71,11 +71,11 @@ const Home = () => {
       <div className="absolute inset-0 hero-gradient opacity-20" />
       
       {/* India Map Background */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none">
         <img 
           src={indiaMap} 
           alt="India Map" 
-          className="w-96 h-96 md:w-[500px] md:h-[500px] opacity-10 object-contain"
+          className="w-full h-full opacity-10 object-cover"
         />
       </div>
       
