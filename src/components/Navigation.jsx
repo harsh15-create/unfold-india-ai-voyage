@@ -1,8 +1,12 @@
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import { LogIn, LogOut, User } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Navigation = () => {
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -61,8 +65,47 @@ const Navigation = () => {
           ))}
         </div>
 
+        {/* Auth Section */}
+        <div className="flex items-center space-x-4">
+          {user ? (
+            <div className="flex items-center space-x-3">
+              {/* User Avatar */}
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
+                  <User className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <span className="text-sm font-medium text-foreground hidden sm:block">
+                  {user.email?.split('@')[0]}
+                </span>
+              </div>
+              
+              {/* Logout Button */}
+              <Button
+                onClick={signOut}
+                variant="ghost"
+                size="sm"
+                className="glass glass-hover text-muted-foreground hover:text-foreground"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                <span className="hidden sm:inline">Logout</span>
+              </Button>
+            </div>
+          ) : (
+            <Link to="/login">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="glass glass-hover text-muted-foreground hover:text-foreground"
+              >
+                <LogIn className="w-4 h-4 mr-2" />
+                Login
+              </Button>
+            </Link>
+          )}
+        </div>
+
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden ml-2">
           <motion.button
             whileTap={{ scale: 0.95 }}
             className="glass glass-hover p-2 rounded-lg"
