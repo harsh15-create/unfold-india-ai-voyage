@@ -12,7 +12,8 @@ const Navigation = () => {
     { name: 'Home', path: '/' },
     { name: 'Chatbot', path: '/chatbot' },
     { name: 'Routes', path: '/routes' },
-    { name: 'Translator', path: '/translator' }
+    { name: 'Translator', path: '/translator' },
+    ...(user ? [{ name: 'My Chats', path: '/my-chats' }] : []),
   ];
 
   return (

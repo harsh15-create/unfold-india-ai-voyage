@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Send, Bot, User, Loader } from 'lucide-react';
+import { saveChat } from '@/lib/supabaseChat';
 
 const Chatbot = () => {
   const [message, setMessage] = useState('');
@@ -30,15 +31,19 @@ const Chatbot = () => {
     setIsTyping(true);
 
     // Simulate AI response
-    setTimeout(() => {
+    setTimeout(async () => {
+      const aiResponseText = generateAIResponse(message);
       const aiResponse = {
         id: Date.now() + 1,
-        text: generateAIResponse(message),
+        text: aiResponseText,
         sender: 'ai',
         timestamp: new Date()
       };
       setMessages(prev => [...prev, aiResponse]);
       setIsTyping(false);
+      
+      // Save chat to database
+      await saveChat(newMessage.text, aiResponseText);
     }, 2000);
   };
 
