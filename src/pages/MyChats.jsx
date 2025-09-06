@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { MessageSquare, Bot, User, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getChatHistory } from '@/lib/supabaseChat';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const MyChats = () => {
   const [chats, setChats] = useState([]);
@@ -10,6 +11,7 @@ const MyChats = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const chatsPerPage = 10;
+  const scrollRef = useRef(null);
 
   const fetchChats = async (page = 1) => {
     setLoading(true);
@@ -27,6 +29,16 @@ const MyChats = () => {
   useEffect(() => {
     fetchChats(currentPage);
   }, [currentPage]);
+
+  useEffect(() => {
+    // Auto-scroll to bottom when chats update
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  }, [chats]);
 
   const totalPages = Math.ceil(totalCount / chatsPerPage);
 
@@ -99,49 +111,61 @@ const MyChats = () => {
           </motion.div>
         ) : (
           <>
-            {/* Chat Cards */}
-            <div className="space-y-4 mb-8">
-              {chats.map((chat, index) => (
-                <motion.div
-                  key={chat.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="glass glass-hover p-6 rounded-2xl"
-                >
-                  {/* Question */}
-                  <div className="flex items-start space-x-3 mb-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-secondary to-primary flex items-center justify-center">
-                      <User className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium text-foreground mb-1">You asked:</p>
-                      <p className="text-muted-foreground bg-gradient-to-r from-secondary/10 to-primary/10 p-3 rounded-xl">
-                        {chat.question}
-                      </p>
-                    </div>
-                  </div>
+            {/* Chat Container */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="glass rounded-2xl mb-6 overflow-hidden"
+            >
+              <ScrollArea className="h-[80vh]" ref={scrollRef}>
+                <div className="p-6 space-y-6">
+                  {chats.map((chat, chatIndex) => (
+                    <div key={chat.id} className="space-y-4">
+                      {/* User Message (Question) */}
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: chatIndex * 0.1 }}
+                        className="flex justify-end"
+                      >
+                        <div className="max-w-[80%] flex items-end space-x-2">
+                          <div className="bg-primary text-primary-foreground rounded-2xl rounded-br-sm p-4 shadow-lg">
+                            <p className="text-sm leading-relaxed">{chat.question}</p>
+                          </div>
+                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-secondary to-primary flex items-center justify-center">
+                            <User className="w-4 h-4 text-primary-foreground" />
+                          </div>
+                        </div>
+                      </motion.div>
 
-                  {/* Answer */}
-                  <div className="flex items-start space-x-3 mb-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent glow-primary flex items-center justify-center">
-                      <Bot className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium text-foreground mb-1">AI replied:</p>
-                      <p className="text-muted-foreground bg-gradient-to-r from-primary/10 to-accent/10 p-3 rounded-xl">
-                        {chat.answer}
-                      </p>
-                    </div>
-                  </div>
+                      {/* AI Message (Answer) */}
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: chatIndex * 0.1 + 0.2 }}
+                        className="flex justify-start"
+                      >
+                        <div className="max-w-[80%] flex items-end space-x-2">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent glow-primary flex items-center justify-center">
+                            <Bot className="w-4 h-4 text-primary-foreground" />
+                          </div>
+                          <div className="bg-muted text-muted-foreground rounded-2xl rounded-bl-sm p-4 shadow-lg">
+                            <p className="text-sm leading-relaxed">{chat.answer}</p>
+                          </div>
+                        </div>
+                      </motion.div>
 
-                  {/* Timestamp */}
-                  <div className="text-xs text-muted-foreground text-right">
-                    {formatDate(chat.created_at)}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                      {/* Timestamp */}
+                      <div className="flex justify-center">
+                        <span className="text-xs text-muted-foreground bg-background/50 px-3 py-1 rounded-full">
+                          {formatDate(chat.created_at)}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </motion.div>
 
             {/* Pagination */}
             {totalPages > 1 && (
