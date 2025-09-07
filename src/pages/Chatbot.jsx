@@ -78,9 +78,14 @@ const Chatbot = () => {
           {messages.map((msg, index) => (
             <motion.div
               key={msg.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                delay: index * 0.1,
+                duration: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              whileHover={{ scale: 1.02 }}
               className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div className={`flex items-start space-x-3 max-w-xl ${msg.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
@@ -93,47 +98,93 @@ const Chatbot = () => {
                   {msg.sender === 'ai' ? <Bot className="w-5 h-5" /> : <User className="w-5 h-5" />}
                 </div>
 
-                {/* Message Bubble */}
-                <div className={`glass glass-hover p-4 rounded-2xl ${
-                  msg.sender === 'user' 
-                    ? 'bg-gradient-to-r from-secondary/20 to-primary/20' 
-                    : 'bg-gradient-to-r from-primary/20 to-accent/20'
-                }`}>
-                  <p className="text-foreground">{msg.text}</p>
-                  <span className="text-xs text-muted-foreground mt-2 block">
+                {/* Enhanced Message Bubble */}
+                <motion.div 
+                  whileHover={{ 
+                    scale: 1.02,
+                    boxShadow: msg.sender === 'user' 
+                      ? '0 8px 32px hsla(var(--secondary) / 0.3)' 
+                      : '0 8px 32px hsla(var(--primary) / 0.3)'
+                  }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className={`glass p-4 rounded-2xl backdrop-blur-xl border ${
+                    msg.sender === 'user' 
+                      ? 'bg-gradient-to-br from-secondary/30 to-primary/20 border-secondary/30' 
+                      : 'bg-gradient-to-br from-primary/30 to-accent/20 border-primary/30'
+                  } transition-all duration-500 ease-out hover:border-opacity-60`}
+                >
+                  <p className="text-foreground leading-relaxed">{msg.text}</p>
+                  <span className="text-xs text-muted-foreground mt-3 block opacity-70 hover:opacity-100 transition-opacity">
                     {msg.timestamp.toLocaleTimeString()}
                   </span>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}
 
-          {/* Typing Indicator */}
+          {/* Enhanced Typing Indicator */}
           {isTyping && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="flex justify-start"
             >
               <div className="flex items-start space-x-3 max-w-xl">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-primary to-accent glow-primary flex items-center justify-center">
+                <motion.div 
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity, 
+                    ease: "easeInOut"
+                  }}
+                  className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-primary to-accent glow-primary flex items-center justify-center"
+                >
                   <Bot className="w-5 h-5" />
-                </div>
-                <div className="glass glass-hover p-4 rounded-2xl bg-gradient-to-r from-primary/20 to-accent/20">
-                  <div className="flex space-x-1">
+                </motion.div>
+                <div className="glass backdrop-blur-xl p-4 rounded-2xl bg-gradient-to-br from-primary/30 to-accent/20 border border-primary/30">
+                  <div className="flex space-x-2">
                     <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                      animate={{ 
+                        scale: [1, 1.4, 1],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 1.2, 
+                        repeat: Infinity, 
+                        delay: 0,
+                        ease: "easeInOut"
+                      }}
                       className="w-2 h-2 bg-primary rounded-full"
                     />
                     <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                      animate={{ 
+                        scale: [1, 1.4, 1],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 1.2, 
+                        repeat: Infinity, 
+                        delay: 0.2,
+                        ease: "easeInOut"
+                      }}
                       className="w-2 h-2 bg-primary rounded-full"
                     />
                     <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                      animate={{ 
+                        scale: [1, 1.4, 1],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 1.2, 
+                        repeat: Infinity, 
+                        delay: 0.4,
+                        ease: "easeInOut"
+                      }}
                       className="w-2 h-2 bg-primary rounded-full"
                     />
                   </div>
@@ -162,10 +213,21 @@ const Chatbot = () => {
             />
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ 
+                scale: 1.1,
+                rotate: [0, -1, 1, 0],
+                boxShadow: '0 0 30px hsla(var(--primary) / 0.6)'
+              }}
+              whileTap={{ 
+                scale: 0.9,
+                rotate: 0
+              }}
+              transition={{ 
+                duration: 0.3,
+                ease: [0.175, 0.885, 0.32, 1.275]
+              }}
               disabled={isTyping || !message.trim()}
-              className="bg-gradient-to-r from-primary to-secondary p-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed glow-primary"
+              className="bg-gradient-to-r from-primary via-accent to-secondary p-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed glow-primary transition-all duration-300 hover:shadow-2xl"
             >
               {isTyping ? (
                 <Loader className="w-5 h-5 animate-spin" />

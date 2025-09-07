@@ -29,35 +29,42 @@ const Home = () => {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
+        delayChildren: 0.4,
+        staggerChildren: 0.15
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 60, opacity: 0, scale: 0.8 },
     visible: {
       y: 0,
       opacity: 1,
+      scale: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   };
 
   const buttonVariants = {
     hover: {
-      scale: 1.05,
-      y: -5,
+      scale: 1.08,
+      y: -8,
+      rotateX: 5,
       transition: {
-        duration: 0.3,
-        ease: "easeOut"
+        duration: 0.4,
+        ease: [0.175, 0.885, 0.32, 1.275]
       }
     },
     tap: {
-      scale: 0.95
+      scale: 0.95,
+      y: 0,
+      transition: {
+        duration: 0.1,
+        ease: "easeOut"
+      }
     }
   };
 
@@ -136,8 +143,9 @@ const Home = () => {
                 whileTap="tap"
                 className="group relative glass glass-hover rounded-2xl p-8 text-center overflow-hidden"
               >
-                {/* Glow Effect */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${feature.gradient} blur-xl`} />
+                {/* Enhanced Glow Effect */}
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-70 transition-all duration-700 ease-out bg-gradient-to-br ${feature.gradient} blur-2xl scale-110`} />
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-30 transition-all duration-500 delay-100 bg-gradient-to-br ${feature.gradient} blur-3xl scale-125`} />
                 
                 {/* Content */}
                 <div className="relative z-10">
@@ -147,11 +155,11 @@ const Home = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-white transition-colors">
+                  <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-white transition-all duration-500 ease-out group-hover:scale-105">
                     {feature.title}
                   </h3>
                   
-                  <p className="text-muted-foreground group-hover:text-white/80 transition-colors text-sm leading-relaxed">
+                  <p className="text-muted-foreground group-hover:text-white/90 transition-all duration-500 delay-75 ease-out text-sm leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -165,17 +173,51 @@ const Home = () => {
           ))}
         </motion.div>
 
-        {/* Floating Elements */}
+        {/* Enhanced Floating Elements */}
         <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-primary/20 to-transparent rounded-full blur-xl"
+          animate={{ 
+            rotate: 360,
+            scale: [1, 1.2, 1],
+            x: [0, 30, 0],
+            y: [0, -20, 0]
+          }}
+          transition={{ 
+            duration: 25, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            times: [0, 0.5, 1]
+          }}
+          className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-primary/30 to-accent/20 rounded-full blur-2xl"
         />
         
         <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-gradient-to-r from-secondary/20 to-transparent rounded-full blur-xl"
+          animate={{ 
+            rotate: -360,
+            scale: [1, 0.8, 1.3, 1],
+            x: [0, -40, 20, 0],
+            y: [0, 30, -15, 0]
+          }}
+          transition={{ 
+            duration: 30, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            times: [0, 0.33, 0.66, 1]
+          }}
+          className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-gradient-to-r from-secondary/30 to-primary/20 rounded-full blur-2xl"
+        />
+        
+        <motion.div
+          animate={{ 
+            rotate: 180,
+            scale: [1, 1.5, 0.8, 1],
+            opacity: [0.3, 0.6, 0.2, 0.3]
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/2 right-1/3 w-16 h-16 bg-gradient-to-r from-accent/40 to-secondary/30 rounded-full blur-xl"
         />
       </motion.div>
     </div>
