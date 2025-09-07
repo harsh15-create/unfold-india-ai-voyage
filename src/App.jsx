@@ -13,6 +13,7 @@ import Chatbot from "./pages/Chatbot";
 import RoutesPage from "./pages/Routes";
 import Translator from "./pages/Translator";
 import MyChats from "./pages/MyChats";
+import MyProfile from "./pages/MyProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/routes" element={<PrivateRoute><RoutesPage /></PrivateRoute>} />
             <Route path="/translator" element={<PrivateRoute><Translator /></PrivateRoute>} />
             <Route path="/my-chats" element={<PrivateRoute><MyChats /></PrivateRoute>} />
+            <Route path="/my-profile" element={<PrivateRoute><MyProfile /></PrivateRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
