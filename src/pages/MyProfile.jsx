@@ -472,7 +472,6 @@ const MyProfile = () => {
                           variant="outline" 
                           className="px-8 py-3 h-12 text-base font-semibold border-destructive/30 hover:border-destructive/50 hover:bg-destructive/10 text-destructive hover:text-destructive transition-all duration-300 rounded-xl"
                         >
-                          <Trash2 className="w-4 h-4 mr-2" />
                           Delete Account
                         </Button>
                       </AlertDialogTrigger>
