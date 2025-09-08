@@ -50,7 +50,8 @@ const Navigation = () => {
       transition={{ duration: 0.6 }}
       className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="absolute inset-0 backdrop-blur-xl bg-background/80 border-b border-white/10 rounded-2xl mx-6 shadow-2xl"></div>
+      <div className="max-w-7xl mx-auto flex items-center justify-between relative z-10">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <motion.div

@@ -15,6 +15,7 @@ import Translator from "./pages/Translator";
 import MyChats from "./pages/MyChats";
 import MyProfile from "./pages/MyProfile";
 import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/my-profile" element={<PrivateRoute><MyProfile /></PrivateRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

@@ -382,7 +382,6 @@ const MyProfile = () => {
                     disabled={saving}
                     className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-2xl"
                   >
-                    <Save className="w-5 h-5 mr-3" />
                     {saving ? (
                       <div className="flex items-center gap-2">
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
@@ -440,14 +439,15 @@ const MyProfile = () => {
                     />
                   </div>
                 </div>
-                
-                <Button 
-                  onClick={handleChangePassword}
-                  className="bg-gradient-to-r from-accent to-secondary hover:from-accent/80 hover:to-secondary/80 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-8 py-3 rounded-xl"
-                >
-                  <Key className="w-4 h-4 mr-2" />
-                  Update Password
-                </Button>
+                <div className="flex justify-center pt-4">
+                  <Button 
+                    onClick={handleChangePassword}
+                    disabled={!newPassword || !confirmPassword}
+                    className="px-8 py-3 h-12 text-base font-semibold bg-gradient-to-r from-accent to-secondary hover:from-accent/80 hover:to-secondary/80 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 rounded-xl"
+                  >
+                    Update Password
+                  </Button>
+                </div>
               </div>
 
               <Separator className="bg-gradient-to-r from-transparent via-glass-border to-transparent" />
@@ -459,22 +459,23 @@ const MyProfile = () => {
                   <h3 className="text-xl font-bold text-destructive">Danger Zone</h3>
                 </div>
                 
-                <div className="glass border-destructive/20 rounded-2xl p-6 space-y-4">
-                  <p className="text-muted-foreground leading-relaxed">
+                <div className="glass border-destructive/20 rounded-2xl p-8 space-y-6">
+                  <p className="text-muted-foreground leading-relaxed text-center">
                     Once you delete your account, there is no going back. This action will permanently remove 
                     all your travel data, chat history, and preferences from our servers.
                   </p>
                   
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button 
-                        variant="outline" 
-                        className="border-destructive/30 hover:border-destructive/50 hover:bg-destructive/10 text-destructive hover:text-destructive transition-all duration-300"
-                      >
-                        <Trash2 className="w-4 h-4 mr-2" />
-                        Delete Account
-                      </Button>
-                    </AlertDialogTrigger>
+                  <div className="flex justify-center">
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button 
+                          variant="outline" 
+                          className="px-8 py-3 h-12 text-base font-semibold border-destructive/30 hover:border-destructive/50 hover:bg-destructive/10 text-destructive hover:text-destructive transition-all duration-300 rounded-xl"
+                        >
+                          <Trash2 className="w-4 h-4 mr-2" />
+                          Delete Account
+                        </Button>
+                      </AlertDialogTrigger>
                     <AlertDialogContent className="glass border-white/20 backdrop-blur-2xl rounded-3xl">
                       <AlertDialogHeader>
                         <AlertDialogTitle className="text-2xl font-bold text-foreground">Are you absolutely sure?</AlertDialogTitle>
@@ -494,7 +495,8 @@ const MyProfile = () => {
                         </AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
-                  </AlertDialog>
+                    </AlertDialog>
+                  </div>
                 </div>
               </div>
             </CardContent>
