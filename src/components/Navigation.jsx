@@ -98,26 +98,36 @@ const Navigation = () => {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full border-2 border-primary/20 hover:border-primary/40 transition-all duration-300">
-                  <Avatar className="h-9 w-9">
+                <Button 
+                  variant="ghost" 
+                  className="relative h-11 w-11 rounded-full border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 p-0 flex items-center justify-center"
+                >
+                  <Avatar className="h-10 w-10">
                     <AvatarImage src={profile.avatar_url} alt={profile.full_name || user.email} />
-                    <AvatarFallback className="bg-primary/10 text-primary text-sm">
+                    <AvatarFallback className="bg-gradient-to-br from-primary/20 to-accent/20 text-primary text-sm font-semibold">
                       {profile.full_name ? profile.full_name.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent 
-                className="w-56 backdrop-blur-xl bg-background/95 border-white/10 shadow-2xl" 
+                className="w-64 backdrop-blur-xl bg-background/95 border-white/10 shadow-2xl rounded-2xl z-50" 
                 align="end" 
                 forceMount
+                sideOffset={8}
               >
-                <div className="flex items-center justify-start gap-2 p-2">
-                  <div className="flex flex-col space-y-1 leading-none">
+                <div className="flex items-center gap-3 p-4">
+                  <Avatar className="h-12 w-12">
+                    <AvatarImage src={profile.avatar_url} alt={profile.full_name || user.email} />
+                    <AvatarFallback className="bg-gradient-to-br from-primary/20 to-accent/20 text-primary font-semibold">
+                      {profile.full_name ? profile.full_name.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col space-y-1 leading-none min-w-0 flex-1">
                     {profile.full_name && (
-                      <p className="font-medium text-sm">{profile.full_name}</p>
+                      <p className="font-semibold text-sm text-foreground truncate">{profile.full_name}</p>
                     )}
-                    <p className="w-[200px] truncate text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-foreground truncate max-w-full">
                       {user.email}
                     </p>
                   </div>
@@ -125,25 +135,25 @@ const Navigation = () => {
                 <DropdownMenuSeparator className="bg-white/10" />
                 <DropdownMenuItem 
                   onClick={() => navigate('/my-profile')}
-                  className="cursor-pointer hover:bg-primary/10 transition-colors"
+                  className="cursor-pointer hover:bg-primary/10 transition-colors m-1 rounded-lg flex items-center py-3 px-3"
                 >
-                  <User className="mr-2 h-4 w-4" />
-                  My Profile
+                  <User className="mr-3 h-4 w-4" />
+                  <span className="font-medium">My Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem 
                   onClick={() => navigate('/my-chats')}
-                  className="cursor-pointer hover:bg-primary/10 transition-colors"
+                  className="cursor-pointer hover:bg-primary/10 transition-colors m-1 rounded-lg flex items-center py-3 px-3"
                 >
-                  <MessageSquare className="mr-2 h-4 w-4" />
-                  My Chats
+                  <MessageSquare className="mr-3 h-4 w-4" />
+                  <span className="font-medium">My Chats</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-white/10" />
                 <DropdownMenuItem 
                   onClick={signOut}
-                  className="cursor-pointer text-destructive hover:bg-destructive/10 hover:text-destructive transition-colors"
+                  className="cursor-pointer text-destructive hover:bg-destructive/10 hover:text-destructive transition-colors m-1 rounded-lg flex items-center py-3 px-3"
                 >
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Logout
+                  <LogOut className="mr-3 h-4 w-4" />
+                  <span className="font-medium">Logout</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
