@@ -223,198 +223,289 @@ const MyProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/80 to-background/60 p-6">
-      <div className="container mx-auto max-w-4xl">
-        <div className="space-y-8">
-          {/* Header */}
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              My Profile
+    <div className="min-h-screen lovable-gradient flex flex-col items-center justify-center px-4 py-20">
+      {/* Hero Background Elements */}
+      <div className="absolute inset-0 hero-gradient opacity-30" />
+      
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="space-y-12">
+          {/* Enhanced Header */}
+          <div className="text-center space-y-6 animate-fade-in">
+            <h1 className="text-6xl md:text-8xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                My Profile
+              </span>
             </h1>
-            <p className="text-muted-foreground">Manage your account settings and preferences</p>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Manage your journey through India with personalized settings
+            </p>
           </div>
 
-          {/* Profile Card */}
-          <Card className="backdrop-blur-xl bg-background/20 border-white/10 shadow-2xl">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <User className="w-5 h-5" />
-                Profile Information
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Avatar Section */}
-              <div className="flex flex-col items-center space-y-4">
-                <Avatar className="w-24 h-24 border-2 border-primary/20">
-                  <AvatarImage src={profile.avatar_url} />
-                  <AvatarFallback className="bg-primary/10 text-primary text-xl">
-                    {profile.full_name ? profile.full_name.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => fileInputRef.current?.click()}
-                  disabled={uploading}
-                  className="border-primary/30 hover:border-primary/50"
-                >
-                  <Camera className="w-4 h-4 mr-2" />
-                  {uploading ? 'Uploading...' : 'Change Avatar'}
-                </Button>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleAvatarUpload}
-                  accept="image/*"
-                  className="hidden"
-                />
-              </div>
+          {/* Profile Section - Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Avatar & Quick Info Card */}
+            <div className="lg:col-span-1">
+              <Card className="glass glass-hover rounded-3xl overflow-hidden glow-primary animate-scale-in">
+                <CardContent className="p-8 text-center space-y-6">
+                  {/* Enhanced Avatar Section */}
+                  <div className="relative group">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur-2xl opacity-30 group-hover:opacity-60 transition-all duration-500"></div>
+                    <Avatar className="relative w-32 h-32 mx-auto border-4 border-primary/20 hover:border-primary/50 transition-all duration-300 shadow-2xl">
+                      <AvatarImage src={profile.avatar_url} className="object-cover" />
+                      <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-3xl font-bold">
+                        {profile.full_name ? profile.full_name.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    
+                    {/* Floating Camera Button */}
+                    <Button
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploading}
+                      className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80 shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300"
+                    >
+                      <Camera className="w-5 h-5" />
+                    </Button>
+                    
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleAvatarUpload}
+                      accept="image/*"
+                      className="hidden"
+                    />
+                  </div>
+                  
+                  {/* Profile Preview */}
+                  <div className="space-y-3">
+                    <h2 className="text-2xl font-bold text-foreground">
+                      {profile.full_name || user?.email?.split('@')[0] || 'Traveler'}
+                    </h2>
+                    <p className="text-muted-foreground">@{profile.username || 'username'}</p>
+                    <div className="flex justify-center">
+                      <span className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full text-sm font-medium border border-primary/30">
+                        Explorer
+                      </span>
+                    </div>
+                  </div>
 
-              {/* Profile Form */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="full_name">Full Name</Label>
-                  <Input
-                    id="full_name"
-                    value={profile.full_name}
-                    onChange={(e) => handleInputChange('full_name', e.target.value)}
-                    className="bg-background/50 border-white/10"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="username">Username</Label>
-                  <Input
-                    id="username"
-                    value={profile.username}
-                    onChange={(e) => handleInputChange('username', e.target.value)}
-                    className="bg-background/50 border-white/10"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={profile.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                    className="bg-background/50 border-white/10"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input
-                    id="phone"
-                    value={profile.phone}
-                    onChange={(e) => handleInputChange('phone', e.target.value)}
-                    className="bg-background/50 border-white/10"
-                  />
-                </div>
-                <div className="space-y-2 md:col-span-1">
-                  <Label htmlFor="gender">Gender</Label>
-                  <Select value={profile.gender} onValueChange={(value) => handleInputChange('gender', value)}>
-                    <SelectTrigger className="bg-background/50 border-white/10">
-                      <SelectValue placeholder="Select gender" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                      <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
+                  {/* Upload Status */}
+                  {uploading && (
+                    <div className="flex items-center justify-center gap-2 text-primary">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+                      <span className="text-sm">Uploading avatar...</span>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
 
-              <Button 
-                onClick={handleSaveProfile} 
-                disabled={saving}
-                className="w-full bg-gradient-to-r from-primary to-purple-600 hover:from-primary/80 hover:to-purple-600/80"
-              >
-                <Save className="w-4 h-4 mr-2" />
-                {saving ? 'Saving...' : 'Save Profile'}
-              </Button>
-            </CardContent>
-          </Card>
+            {/* Profile Form Card */}
+            <div className="lg:col-span-2">
+              <Card className="glass glass-hover rounded-3xl overflow-hidden glow-secondary animate-fade-in-left">
+                <CardHeader className="border-b border-white/10 bg-gradient-to-r from-primary/5 to-accent/5">
+                  <CardTitle className="flex items-center gap-3 text-2xl">
+                    <div className="p-2 rounded-xl bg-gradient-to-r from-primary to-accent">
+                      <User className="w-6 h-6 text-white" />
+                    </div>
+                    Profile Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-8 space-y-8">
+                  
+                  {/* Profile Form Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-3 group">
+                      <Label htmlFor="full_name" className="text-foreground font-medium">Full Name</Label>
+                      <Input
+                        id="full_name"
+                        value={profile.full_name}
+                        onChange={(e) => handleInputChange('full_name', e.target.value)}
+                        className="glass border-glass-border/50 focus:border-primary/50 transition-all duration-300 group-hover:border-primary/30"
+                        placeholder="Enter your full name"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3 group">
+                      <Label htmlFor="username" className="text-foreground font-medium">Username</Label>
+                      <Input
+                        id="username"
+                        value={profile.username}
+                        onChange={(e) => handleInputChange('username', e.target.value)}
+                        className="glass border-glass-border/50 focus:border-primary/50 transition-all duration-300 group-hover:border-primary/30"
+                        placeholder="Choose a unique username"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3 group">
+                      <Label htmlFor="email" className="text-foreground font-medium">Email Address</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={profile.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        className="glass border-glass-border/50 focus:border-primary/50 transition-all duration-300 group-hover:border-primary/30"
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3 group">
+                      <Label htmlFor="phone" className="text-foreground font-medium">Phone Number</Label>
+                      <Input
+                        id="phone"
+                        value={profile.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        className="glass border-glass-border/50 focus:border-primary/50 transition-all duration-300 group-hover:border-primary/30"
+                        placeholder="+91 98765 43210"
+                      />
+                    </div>
+                    
+                    <div className="space-y-3 md:col-span-2">
+                      <Label htmlFor="gender" className="text-foreground font-medium">Gender</Label>
+                      <Select value={profile.gender} onValueChange={(value) => handleInputChange('gender', value)}>
+                        <SelectTrigger className="glass border-glass-border/50 focus:border-primary/50 transition-all duration-300">
+                          <SelectValue placeholder="Select your gender" />
+                        </SelectTrigger>
+                        <SelectContent className="glass border-glass-border backdrop-blur-xl">
+                          <SelectItem value="male">Male</SelectItem>
+                          <SelectItem value="female">Female</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {/* Enhanced Save Button */}
+                  <Button 
+                    onClick={handleSaveProfile} 
+                    disabled={saving}
+                    className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-2xl"
+                  >
+                    <Save className="w-5 h-5 mr-3" />
+                    {saving ? (
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                        Saving Profile...
+                      </div>
+                    ) : (
+                      'Save Profile'
+                    )}
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
 
           {/* Settings Card */}
-          <Card className="backdrop-blur-xl bg-background/20 border-white/10 shadow-2xl">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Key className="w-5 h-5" />
+          <Card className="glass glass-hover rounded-3xl overflow-hidden glow-primary animate-fade-in-up">
+            <CardHeader className="border-b border-white/10 bg-gradient-to-r from-accent/5 to-primary/5">
+              <CardTitle className="flex items-center gap-3 text-2xl">
+                <div className="p-2 rounded-xl bg-gradient-to-r from-accent to-primary">
+                  <Key className="w-6 h-6 text-white" />
+                </div>
                 Account Settings
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Change Password */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Change Password</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="new_password">New Password</Label>
+            <CardContent className="p-8 space-y-10">
+              
+              {/* Password Change Section */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-8 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+                  <h3 className="text-xl font-bold text-foreground">Change Password</h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-3 group">
+                    <Label htmlFor="new_password" className="text-foreground font-medium">New Password</Label>
                     <Input
                       id="new_password"
                       type="password"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
-                      className="bg-background/50 border-white/10"
+                      className="glass border-glass-border/50 focus:border-accent/50 transition-all duration-300 group-hover:border-accent/30"
+                      placeholder="Enter new password"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="confirm_password">Confirm Password</Label>
+                  <div className="space-y-3 group">
+                    <Label htmlFor="confirm_password" className="text-foreground font-medium">Confirm Password</Label>
                     <Input
                       id="confirm_password"
                       type="password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="bg-background/50 border-white/10"
+                      className="glass border-glass-border/50 focus:border-accent/50 transition-all duration-300 group-hover:border-accent/30"
+                      placeholder="Confirm new password"
                     />
                   </div>
                 </div>
+                
                 <Button 
                   onClick={handleChangePassword}
-                  variant="outline"
-                  className="border-primary/30 hover:border-primary/50"
+                  className="bg-gradient-to-r from-accent to-secondary hover:from-accent/80 hover:to-secondary/80 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-8 py-3 rounded-xl"
                 >
+                  <Key className="w-4 h-4 mr-2" />
                   Update Password
                 </Button>
               </div>
 
-              <Separator className="bg-white/10" />
+              <Separator className="bg-gradient-to-r from-transparent via-glass-border to-transparent" />
 
-              {/* Delete Account */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-destructive">Danger Zone</h3>
-                <p className="text-sm text-muted-foreground">
-                  Once you delete your account, there is no going back. Please be certain.
-                </p>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant="destructive" className="bg-destructive/20 hover:bg-destructive/30 border border-destructive/30">
-                      <Trash2 className="w-4 h-4 mr-2" />
-                      Delete Account
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent className="backdrop-blur-xl bg-background/95 border-white/10">
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove all your data from our servers.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleDeleteAccount} className="bg-destructive hover:bg-destructive/80">
-                        Yes, delete my account
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+              {/* Danger Zone */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-8 bg-gradient-to-b from-destructive to-red-600 rounded-full"></div>
+                  <h3 className="text-xl font-bold text-destructive">Danger Zone</h3>
+                </div>
+                
+                <div className="glass border-destructive/20 rounded-2xl p-6 space-y-4">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Once you delete your account, there is no going back. This action will permanently remove 
+                    all your travel data, chat history, and preferences from our servers.
+                  </p>
+                  
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        className="border-destructive/30 hover:border-destructive/50 hover:bg-destructive/10 text-destructive hover:text-destructive transition-all duration-300"
+                      >
+                        <Trash2 className="w-4 h-4 mr-2" />
+                        Delete Account
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className="glass border-white/20 backdrop-blur-2xl rounded-3xl">
+                      <AlertDialogHeader>
+                        <AlertDialogTitle className="text-2xl font-bold text-foreground">Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription className="text-muted-foreground leading-relaxed">
+                          This action cannot be undone. This will permanently delete your account
+                          and remove all your data from our servers, including your travel history,
+                          preferences, and chat conversations.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter className="gap-3">
+                        <AlertDialogCancel className="glass hover:bg-background/80">Cancel</AlertDialogCancel>
+                        <AlertDialogAction 
+                          onClick={handleDeleteAccount} 
+                          className="bg-destructive hover:bg-destructive/80 shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          Yes, delete my account
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
+
+      {/* Enhanced Floating Elements */}
+      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl animate-float opacity-60"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-gradient-to-r from-secondary/20 to-primary/20 rounded-full blur-3xl animate-float opacity-50" style={{animationDelay: '2s'}}></div>
+      <div className="absolute top-1/2 right-1/3 w-16 h-16 bg-gradient-to-r from-accent/30 to-secondary/30 rounded-full blur-2xl animate-float opacity-40" style={{animationDelay: '4s'}}></div>
     </div>
   );
 };
