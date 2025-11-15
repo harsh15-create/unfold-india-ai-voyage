@@ -158,14 +158,9 @@ const Home = () => {
                     {feature.title}
                   </h3>
                   
-                  <p className="text-muted-foreground group-hover:text-white/90 transition-all duration-500 delay-75 ease-out text-sm leading-relaxed">
+                  <p className="text-muted-foreground transition-all duration-300 text-sm leading-relaxed">
                     {feature.description}
                   </p>
-                </div>
-
-                {/* Border Glow */}
-                <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${feature.gradient} p-[2px]`}>
-                  <div className="w-full h-full rounded-2xl bg-background/90" />
                 </div>
               </motion.div>
             </Link>

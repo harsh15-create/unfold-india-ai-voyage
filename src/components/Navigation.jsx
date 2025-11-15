@@ -48,23 +48,25 @@ const Navigation = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl"
+      className="fixed top-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl"
     >
-      <div className="absolute inset-0 backdrop-blur-[25px] bg-white/10 border border-white/20 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]"></div>
-      <div className="flex items-center justify-between relative z-10 px-8 py-4">
+      <div className="absolute inset-0 backdrop-blur-[25px] bg-white/25 border border-white/30 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)]"></div>
+      <div className="flex items-center justify-between relative z-10 py-4 pl-6 pr-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
-          >
-            Unfold India 🌏
-          </motion.div>
-        </Link>
+        <div className="flex-shrink-0" style={{ width: '180px' }}>
+          <Link to="/" className="flex items-center">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+            >
+              Unfold India 🌏
+            </motion.div>
+          </Link>
+        </div>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center justify-center space-x-8 flex-1 mx-8">
+        {/* Navigation Links - Centered */}
+        <div className="hidden md:flex items-center justify-center space-x-8 flex-1">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -95,7 +97,7 @@ const Navigation = () => {
         </div>
 
         {/* Auth Section */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center justify-end flex-shrink-0" style={{ width: '180px' }}>
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
