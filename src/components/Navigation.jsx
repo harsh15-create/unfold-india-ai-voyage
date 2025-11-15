@@ -101,10 +101,10 @@ const Navigation = () => {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  className="relative h-11 w-11 rounded-full border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 p-0 flex items-center justify-center"
-                >
+              <Button 
+                variant="ghost" 
+                className="relative h-11 w-11 rounded-full backdrop-blur-[20px] bg-white/20 hover:bg-white/30 transition-all duration-300 p-0 flex items-center justify-center"
+              >
                   <Avatar className="h-10 w-10">
                     <AvatarImage src={profile.avatar_url} alt={profile.full_name || user.email} />
                     <AvatarFallback className="bg-gradient-to-br from-primary/20 to-accent/20 text-primary text-sm font-semibold">
@@ -165,7 +165,7 @@ const Navigation = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="glass glass-hover text-muted-foreground hover:text-foreground"
+                className="backdrop-blur-[20px] bg-white/20 hover:bg-white/30 text-muted-foreground hover:text-foreground transition-all duration-300"
               >
                 <LogIn className="w-4 h-4 mr-2" />
                 Login

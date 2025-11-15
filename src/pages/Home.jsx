@@ -141,7 +141,7 @@ const Home = () => {
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="group relative glass rounded-2xl p-8 text-center overflow-hidden backdrop-blur-md hover:backdrop-blur-[30px] hover:bg-white/5 hover:brightness-110 transition-all duration-500"
+                className="group relative backdrop-blur-[20px] bg-white/15 rounded-2xl p-8 text-center overflow-hidden hover:backdrop-blur-[30px] hover:bg-white/25 hover:brightness-110 transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
               >
                 {/* Subtle Glow Effect on Hover */}
                 <div className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700 ease-out bg-gradient-to-br ${feature.gradient} blur-3xl`} />

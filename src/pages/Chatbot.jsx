@@ -202,7 +202,7 @@ const Chatbot = () => {
         className="p-4"
       >
         <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto">
-          <div className="glass glass-hover p-4 rounded-2xl flex items-center space-x-4">
+          <div className="backdrop-blur-[20px] bg-white/20 border border-white/30 p-4 rounded-2xl flex items-center space-x-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:backdrop-blur-[25px] hover:bg-white/25 transition-all duration-300">
             <input
               type="text"
               value={message}
@@ -227,7 +227,7 @@ const Chatbot = () => {
                 ease: [0.175, 0.885, 0.32, 1.275]
               }}
               disabled={isTyping || !message.trim()}
-              className="bg-gradient-to-r from-primary via-accent to-secondary p-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed glow-primary transition-all duration-300 hover:shadow-2xl"
+              className="backdrop-blur-[20px] bg-primary/25 border border-primary/30 hover:bg-primary/35 hover:backdrop-blur-[25px] p-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300"
             >
               {isTyping ? (
                 <Loader className="w-5 h-5 animate-spin" />

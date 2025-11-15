@@ -94,8 +94,8 @@ const Translator = () => {
                 onClick={() => setSelectedLanguage(lang.code)}
                 className={`p-4 rounded-xl text-center transition-all ${
                   selectedLanguage === lang.code
-                    ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg glow-primary'
-                    : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground'
+                    ? 'backdrop-blur-[20px] bg-primary/25 border border-primary/30 text-white shadow-[0_4px_20px_rgba(0,0,0,0.05)]'
+                    : 'backdrop-blur-[15px] bg-white/10 border border-white/20 text-muted-foreground hover:bg-white/20 hover:backdrop-blur-[20px] hover:text-foreground'
                 }`}
               >
                 <div className="font-medium text-sm">{lang.name}</div>
@@ -121,7 +121,7 @@ const Translator = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={handleSwapLanguages}
-                  className="p-2 rounded-lg bg-muted hover:bg-accent transition-colors"
+                  className="p-2 rounded-lg backdrop-blur-[15px] bg-white/15 border border-white/20 hover:bg-white/25 hover:backdrop-blur-[20px] transition-all duration-300"
                 >
                   <RotateCcw className="w-4 h-4" />
                 </motion.button>
@@ -140,9 +140,8 @@ const Translator = () => {
               whileTap={{ scale: 0.98 }}
               onClick={handleTranslate}
               disabled={isTranslating || !inputText.trim()}
-              className="w-full mt-4 bg-gradient-to-r from-primary to-secondary p-3 rounded-xl text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
+              className="w-full mt-4 backdrop-blur-[20px] bg-primary/25 border border-primary/30 hover:bg-primary/35 hover:backdrop-blur-[25px] p-3 rounded-xl text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10 flex items-center justify-center space-x-2">
                 {isTranslating ? (
                   <>
@@ -184,7 +183,7 @@ const Translator = () => {
                   whileTap={{ scale: 0.9 }}
                   onClick={handleCopyText}
                   disabled={!outputText}
-                  className="p-2 rounded-lg bg-muted hover:bg-accent transition-colors disabled:opacity-50"
+                  className="p-2 rounded-lg backdrop-blur-[15px] bg-white/15 border border-white/20 hover:bg-white/25 hover:backdrop-blur-[20px] transition-all duration-300 disabled:opacity-50"
                 >
                   <Copy className="w-4 h-4" />
                 </motion.button>
@@ -205,9 +204,8 @@ const Translator = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={handlePlayAudio}
                 disabled={isPlaying}
-                className="w-full mt-4 bg-gradient-to-r from-secondary to-primary p-3 rounded-xl text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group z-10"
+                className="w-full mt-4 backdrop-blur-[20px] bg-secondary/25 border border-secondary/30 hover:bg-secondary/35 hover:backdrop-blur-[25px] p-3 rounded-xl text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300 z-10"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center justify-center space-x-2">
                   {isPlaying ? (
                     <>
