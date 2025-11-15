@@ -127,9 +127,8 @@ const Routes = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             disabled={isLoading || !startLocation || !destination}
-            className="w-full bg-gradient-to-r from-primary to-secondary p-4 rounded-xl text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
+            className="w-full backdrop-blur-[20px] bg-primary/25 border border-primary/30 hover:bg-primary/35 hover:backdrop-blur-[25px] p-4 rounded-xl text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative z-10 flex items-center justify-center space-x-2">
               {isLoading ? (
                 <>

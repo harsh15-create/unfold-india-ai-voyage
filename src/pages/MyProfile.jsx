@@ -262,7 +262,7 @@ const MyProfile = () => {
                     <Button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={uploading}
-                      className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80 shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300"
+                      className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full backdrop-blur-[20px] bg-primary/25 border border-primary/30 hover:bg-primary/35 hover:backdrop-blur-[25px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transform hover:scale-110 transition-all duration-300"
                     >
                       <Camera className="w-5 h-5" />
                     </Button>
@@ -380,7 +380,7 @@ const MyProfile = () => {
                   <Button 
                     onClick={handleSaveProfile} 
                     disabled={saving}
-                    className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-2xl"
+                    className="w-full h-14 text-lg font-semibold backdrop-blur-[20px] bg-primary/25 border border-primary/30 hover:bg-primary/35 hover:backdrop-blur-[25px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transform hover:scale-105 transition-all duration-300 rounded-2xl"
                   >
                     {saving ? (
                       <div className="flex items-center gap-2">
@@ -443,7 +443,7 @@ const MyProfile = () => {
                   <Button 
                     onClick={handleChangePassword}
                     disabled={!newPassword || !confirmPassword}
-                    className="px-8 py-3 h-12 text-base font-semibold bg-gradient-to-r from-accent to-secondary hover:from-accent/80 hover:to-secondary/80 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 rounded-xl"
+                    className="px-8 py-3 h-12 text-base font-semibold backdrop-blur-[20px] bg-secondary/25 border border-secondary/30 hover:bg-secondary/35 hover:backdrop-blur-[25px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transform hover:scale-105 transition-all duration-300 rounded-xl"
                   >
                     Update Password
                   </Button>
@@ -470,7 +470,7 @@ const MyProfile = () => {
                       <AlertDialogTrigger asChild>
                         <Button 
                           variant="outline" 
-                          className="px-8 py-3 h-12 text-base font-semibold border-destructive/30 hover:border-destructive/50 hover:bg-destructive/10 text-destructive hover:text-destructive transition-all duration-300 rounded-xl"
+                          className="px-8 py-3 h-12 text-base font-semibold backdrop-blur-[20px] bg-destructive/15 border border-destructive/30 hover:bg-destructive/25 hover:backdrop-blur-[25px] text-destructive hover:text-destructive transition-all duration-300 rounded-xl"
                         >
                           Delete Account
                         </Button>

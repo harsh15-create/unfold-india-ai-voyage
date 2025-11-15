@@ -178,7 +178,7 @@ const MyChats = () => {
                   variant="outline"
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] transition-all duration-300"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   <span>Previous</span>
@@ -194,7 +194,7 @@ const MyChats = () => {
                   variant="outline"
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] transition-all duration-300"
                 >
                   <span>Next</span>
                   <ChevronRight className="w-4 h-4" />

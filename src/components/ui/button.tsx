@@ -5,18 +5,18 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "backdrop-blur-[20px] bg-white/25 border border-white/30 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:bg-white/35 hover:backdrop-blur-[25px] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)]",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "backdrop-blur-[20px] bg-destructive/25 border border-destructive/30 text-destructive-foreground shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:bg-destructive/35 hover:backdrop-blur-[25px]",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "backdrop-blur-[20px] bg-white/15 border border-white/20 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:bg-white/25 hover:backdrop-blur-[25px]",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+          "backdrop-blur-[20px] bg-secondary/25 border border-secondary/30 text-secondary-foreground shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:bg-secondary/35 hover:backdrop-blur-[25px]",
+        ghost: "backdrop-blur-[15px] bg-transparent hover:bg-white/20 hover:backdrop-blur-[20px]",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
