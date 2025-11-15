@@ -141,21 +141,20 @@ const Home = () => {
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="group relative glass glass-hover rounded-2xl p-8 text-center overflow-hidden"
+                className="group relative glass rounded-2xl p-8 text-center overflow-hidden backdrop-blur-md hover:backdrop-blur-[30px] hover:bg-white/5 hover:brightness-110 transition-all duration-500"
               >
-                {/* Enhanced Glow Effect */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-70 transition-all duration-700 ease-out bg-gradient-to-br ${feature.gradient} blur-2xl scale-110`} />
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-30 transition-all duration-500 delay-100 bg-gradient-to-br ${feature.gradient} blur-3xl scale-125`} />
+                {/* Subtle Glow Effect on Hover */}
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700 ease-out bg-gradient-to-br ${feature.gradient} blur-3xl`} />
                 
                 {/* Content */}
                 <div className="relative z-10">
                   <div className="flex justify-center mb-4">
-                    <div className={`p-4 rounded-xl bg-gradient-to-br ${feature.gradient} animate-glow-pulse`}>
+                    <div className={`p-4 rounded-xl bg-gradient-to-br ${feature.gradient}`}>
                       <feature.icon className="w-8 h-8 text-white" />
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-white transition-all duration-500 ease-out group-hover:scale-105">
+                  <h3 className="text-xl font-bold mb-3 text-foreground transition-all duration-300">
                     {feature.title}
                   </h3>
                   
