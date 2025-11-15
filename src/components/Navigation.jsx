@@ -48,23 +48,23 @@ const Navigation = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl"
     >
-      <div className="absolute inset-0 backdrop-blur-xl bg-background/80 border-b border-white/10 rounded-2xl mx-6 shadow-2xl"></div>
-      <div className="max-w-7xl mx-auto flex items-center justify-between relative z-10">
+      <div className="absolute inset-0 backdrop-blur-[25px] bg-white/10 border border-white/20 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]"></div>
+      <div className="flex items-center justify-between relative z-10 px-8 py-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center">
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+            className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
           >
             Unfold India 🌏
           </motion.div>
         </Link>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center justify-center space-x-8 flex-1 mx-8">
           {navItems.map((item) => (
             <Link
               key={item.name}
