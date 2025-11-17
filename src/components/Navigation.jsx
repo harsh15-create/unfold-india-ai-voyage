@@ -48,7 +48,7 @@ const Navigation = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl"
+      className="fixed top-8 left-1/4 -translate-x-1/2 z-50 w-[40%] max-w-6xl"
     >
       <div className="absolute inset-0 backdrop-blur-[25px] bg-white/25 border border-white/30 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)]"></div>
       <div className="flex items-center justify-between relative z-10 py-4 pl-6 pr-6">
