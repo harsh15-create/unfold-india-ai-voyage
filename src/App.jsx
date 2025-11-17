@@ -27,17 +27,19 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Navigation />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/chatbot" element={<PrivateRoute><Chatbot /></PrivateRoute>} />
-            <Route path="/routes" element={<PrivateRoute><RoutesPage /></PrivateRoute>} />
-            <Route path="/translator" element={<PrivateRoute><Translator /></PrivateRoute>} />
-            <Route path="/my-chats" element={<PrivateRoute><MyChats /></PrivateRoute>} />
-            <Route path="/my-profile" element={<PrivateRoute><MyProfile /></PrivateRoute>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="pt-28 md:pt-32">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/chatbot" element={<PrivateRoute><Chatbot /></PrivateRoute>} />
+              <Route path="/routes" element={<PrivateRoute><RoutesPage /></PrivateRoute>} />
+              <Route path="/translator" element={<PrivateRoute><Translator /></PrivateRoute>} />
+              <Route path="/my-chats" element={<PrivateRoute><MyChats /></PrivateRoute>} />
+              <Route path="/my-profile" element={<PrivateRoute><MyProfile /></PrivateRoute>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
           <Footer />
         </AuthProvider>
       </BrowserRouter>
