@@ -27,7 +27,7 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Navigation />
-          <div className="pt-28 md:pt-32">
+          <div className="pt-12 md:pt-18">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
