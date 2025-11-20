@@ -86,6 +86,16 @@ const Routes = () => {
     }, 2000);
   };
 
+  const getModeIcon = () => {
+    const icons = {
+      car: Car,
+      bike: Bike,
+      walk: Footprints,
+      transit: Bus
+    };
+    return icons[transportMode];
+  };
+
   const SafetyScore = ({ score }) => {
     const circumference = 2 * Math.PI * 45;
     const strokeDasharray = `${(score / 100) * circumference} ${circumference}`;
@@ -158,39 +168,35 @@ const Routes = () => {
               type="single" 
               value={transportMode} 
               onValueChange={(value) => value && setTransportMode(value)}
-              className="justify-start flex-wrap gap-3"
+              className="justify-center gap-4"
             >
               <ToggleGroupItem 
                 value="car" 
                 aria-label="Car"
-                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 px-6 py-3 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 w-14 h-14 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
               >
-                <Car className="w-5 h-5 mr-2" />
-                Car
+                <Car className="w-6 h-6" />
               </ToggleGroupItem>
               <ToggleGroupItem 
                 value="bike" 
                 aria-label="Bike"
-                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 px-6 py-3 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 w-14 h-14 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
               >
-                <Bike className="w-5 h-5 mr-2" />
-                Bike
+                <Bike className="w-6 h-6" />
               </ToggleGroupItem>
               <ToggleGroupItem 
                 value="walk" 
                 aria-label="Walking"
-                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 px-6 py-3 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 w-14 h-14 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
               >
-                <Footprints className="w-5 h-5 mr-2" />
-                Walking
+                <Footprints className="w-6 h-6" />
               </ToggleGroupItem>
               <ToggleGroupItem 
                 value="transit" 
                 aria-label="Public Transit"
-                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 px-6 py-3 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 w-14 h-14 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
               >
-                <Bus className="w-5 h-5 mr-2" />
-                Transit
+                <Bus className="w-6 h-6" />
               </ToggleGroupItem>
             </ToggleGroup>
           </div>
@@ -261,7 +267,7 @@ const Routes = () => {
                   <Clock className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground">🚗 Fastest Route</h3>
+                  <h3 className="text-xl font-bold text-foreground">Fastest Route</h3>
                   <p className="text-muted-foreground">Quickest way to reach</p>
                 </div>
               </div>
@@ -275,13 +281,22 @@ const Routes = () => {
                   <span className="text-muted-foreground">Distance</span>
                   <span className="text-xl font-semibold text-foreground">{routes.fastest.distance}</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Traffic</span>
-                  <span className="text-secondary font-medium">{routes.fastest.traffic}</span>
-                </div>
+                {routes.fastest.traffic !== 'N/A' && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Traffic</span>
+                    <span className="text-secondary font-medium">{routes.fastest.traffic}</span>
+                  </div>
+                )}
                 <div className="pt-4 border-t border-border">
-                  <p className="text-sm text-muted-foreground mb-2">Route Preview:</p>
-                  <p className="text-foreground">{routes.fastest.route}</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground">Transportation Mode:</p>
+                    <div className="backdrop-blur-[20px] bg-primary/20 border border-primary/30 p-2 rounded-lg">
+                      {(() => {
+                        const ModeIcon = getModeIcon();
+                        return <ModeIcon className="w-5 h-5 text-primary" />;
+                      })()}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -295,7 +310,7 @@ const Routes = () => {
                   <Shield className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground">🛡️ Safest Route</h3>
+                  <h3 className="text-xl font-bold text-foreground">Safest Route</h3>
                   <p className="text-muted-foreground">AI Recommended</p>
                 </div>
               </div>
@@ -316,6 +331,15 @@ const Routes = () => {
                 </div>
 
                 <div className="pt-4 border-t border-border">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-sm text-muted-foreground">Transportation Mode:</p>
+                    <div className="backdrop-blur-[20px] bg-green-500/20 border border-green-500/30 p-2 rounded-lg">
+                      {(() => {
+                        const ModeIcon = getModeIcon();
+                        return <ModeIcon className="w-5 h-5 text-green-400" />;
+                      })()}
+                    </div>
+                  </div>
                   <p className="text-sm text-muted-foreground mb-2">Safety Features:</p>
                   <div className="flex flex-wrap gap-2">
                     {routes.safest.features.map((feature, index) => (
