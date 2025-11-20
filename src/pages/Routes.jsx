@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { MapPin, Navigation, Clock, Shield, Route } from 'lucide-react';
+import { MapPin, Navigation, Clock, Shield, Route, Car, Bike, Footprints, Bus } from 'lucide-react';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 const Routes = () => {
   const [startLocation, setStartLocation] = useState('');
   const [destination, setDestination] = useState('');
   const [routes, setRoutes] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [transportMode, setTransportMode] = useState('car');
 
   const handleFindRoutes = async (e) => {
     e.preventDefault();
@@ -14,23 +16,72 @@ const Routes = () => {
 
     setIsLoading(true);
     
-    // Simulate API call
+    // Simulate API call with different data based on transport mode
     setTimeout(() => {
-      setRoutes({
-        fastest: {
-          duration: '4h 32m',
-          distance: '287 km',
-          traffic: 'Moderate',
-          route: 'NH44 → State Highway 15 → City Ring Road'
+      const routeData = {
+        car: {
+          fastest: {
+            duration: '4h 32m',
+            distance: '287 km',
+            traffic: 'Moderate',
+            route: 'NH44 → State Highway 15 → City Ring Road'
+          },
+          safest: {
+            duration: '5h 15m',
+            distance: '312 km',
+            safety_score: 92,
+            route: 'Express Highway → Bypass Route → Local Roads',
+            features: ['Well-lit roads', 'Police checkpoints', 'Rest stops']
+          }
         },
-        safest: {
-          duration: '5h 15m',
-          distance: '312 km',
-          safety_score: 92,
-          route: 'Express Highway → Bypass Route → Local Roads',
-          features: ['Well-lit roads', 'Police checkpoints', 'Rest stops']
+        bike: {
+          fastest: {
+            duration: '5h 45m',
+            distance: '265 km',
+            traffic: 'Light',
+            route: 'Scenic Route → Bypass Road → Local Streets'
+          },
+          safest: {
+            duration: '6h 20m',
+            distance: '278 km',
+            safety_score: 88,
+            route: 'Dedicated Bike Lanes → Park Routes → Quiet Streets',
+            features: ['Bike lanes', 'Less traffic', 'Safe crossings']
+          }
+        },
+        walk: {
+          fastest: {
+            duration: '58h 15m',
+            distance: '287 km',
+            traffic: 'N/A',
+            route: 'Pedestrian Paths → City Sidewalks'
+          },
+          safest: {
+            duration: '62h 30m',
+            distance: '295 km',
+            safety_score: 95,
+            route: 'Walking Trails → Residential Areas → Park Paths',
+            features: ['Pedestrian zones', 'Safe crossings', 'Well-lit paths']
+          }
+        },
+        transit: {
+          fastest: {
+            duration: '6h 15m',
+            distance: '295 km',
+            traffic: 'N/A',
+            route: 'Metro Line 2 → Express Bus → Local Bus'
+          },
+          safest: {
+            duration: '6h 45m',
+            distance: '302 km',
+            safety_score: 90,
+            route: 'Express Train → Metro → Local Transit',
+            features: ['CCTV coverage', 'Security personnel', 'Well-maintained stations']
+          }
         }
-      });
+      };
+      
+      setRoutes(routeData[transportMode]);
       setIsLoading(false);
     }, 2000);
   };
@@ -98,6 +149,52 @@ const Routes = () => {
           transition={{ delay: 0.2 }}
           className="glass glass-hover p-8 rounded-2xl mb-8"
         >
+          {/* Transportation Mode Selection */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-foreground mb-3">
+              Transportation Mode
+            </label>
+            <ToggleGroup 
+              type="single" 
+              value={transportMode} 
+              onValueChange={(value) => value && setTransportMode(value)}
+              className="justify-start flex-wrap gap-3"
+            >
+              <ToggleGroupItem 
+                value="car" 
+                aria-label="Car"
+                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 px-6 py-3 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+              >
+                <Car className="w-5 h-5 mr-2" />
+                Car
+              </ToggleGroupItem>
+              <ToggleGroupItem 
+                value="bike" 
+                aria-label="Bike"
+                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 px-6 py-3 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+              >
+                <Bike className="w-5 h-5 mr-2" />
+                Bike
+              </ToggleGroupItem>
+              <ToggleGroupItem 
+                value="walk" 
+                aria-label="Walking"
+                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 px-6 py-3 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+              >
+                <Footprints className="w-5 h-5 mr-2" />
+                Walking
+              </ToggleGroupItem>
+              <ToggleGroupItem 
+                value="transit" 
+                aria-label="Public Transit"
+                className="backdrop-blur-[20px] bg-white/20 border border-white/30 hover:bg-white/30 hover:backdrop-blur-[25px] data-[state=on]:bg-primary/30 data-[state=on]:border-primary/40 px-6 py-3 rounded-xl transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+              >
+                <Bus className="w-5 h-5 mr-2" />
+                Transit
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary w-5 h-5" />
